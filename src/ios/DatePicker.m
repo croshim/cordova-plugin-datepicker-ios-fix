@@ -103,7 +103,7 @@
 #pragma mark - Factory methods
 
 - (UIActionSheet *)createActionSheet:(NSMutableDictionary *)options {
-  UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+  UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
                                                         delegate:self cancelButtonTitle:nil
                                                         destructiveButtonTitle:nil 
                                                         otherButtonTitles:nil];
