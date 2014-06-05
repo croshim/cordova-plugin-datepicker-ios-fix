@@ -134,7 +134,6 @@
   CGFloat pickerViewWidth = 320.0f;
   CGFloat pickerViewHeight = 216.0f;
   UIView *datePickerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pickerViewWidth, pickerViewHeight)];
-  datePickerView.backgroundColor = [UIColor whiteColor];
 
   CGRect frame = CGRectMake(0, 0, 0, 0);
   if(!self.datePicker){
@@ -160,7 +159,10 @@
 }
 
 - (UIDatePicker *)createDatePicker:(NSMutableDictionary *)options frame:(CGRect)frame { 
-  UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:frame];      
+  UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:frame];   
+  if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+    datePicker.backgroundColor = [UIColor whiteColor];
+  }   
   return datePicker;
 }
 
