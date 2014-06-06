@@ -117,11 +117,27 @@
   [self updateDatePicker:options];
   [actionSheet addSubview: self.datePicker];
   // cancel button
-  UISegmentedControl *cancelButton = [self createCancelButton:options];
-  [actionSheet addSubview:cancelButton];
-  // done button
-  UISegmentedControl *doneButton = [self createDoneButton:options];    
-  [actionSheet addSubview:doneButton];
+
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        UIBarButtonItem * cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAction:)];
+        UIBarButtonItem * flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+        UIBarButtonItem * doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
+        
+        UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        
+        NSArray * barButtons = @[cancelButton,flexibleSpace,doneButton];
+        [toolBar setBarStyle:UIBarStyleBlackOpaque];
+        [toolBar setItems:barButtons];
+        
+        [actionSheet addSubview:toolBar];
+    } else {
+        UISegmentedControl *cancelButton = [self createCancelButton:options];
+        [actionSheet addSubview:cancelButton];
+        // done button
+        UISegmentedControl *doneButton = [self createDoneButton:options];
+        [actionSheet addSubview:doneButton];
+    }
+    
   // show UIActionSheet
   [actionSheet showInView:self.webView.superview];
   [actionSheet setBounds:CGRectMake(0, 0, 320, 485)];
